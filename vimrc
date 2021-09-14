@@ -311,33 +311,31 @@ filetype on
 " -----------------------------
 " autocmd vimenter * NERDTree  "自动开启Nerdtree
 autocmd vimenter * if !argc()|NERDTree|endif
-
-nmap <leader>t :NERDTreeToggle<CR>                          " 关闭NERDTree快捷键
-nmap <leader>nt :NERDTreeFind<CR>
-nnoremap <F3> :NERDTreeToggle<CR> " 开启/关闭nerdtree快捷键"
-"nnoremap <leader>nt :NERDTreeToggle<CR> 
-"nnoremap <leader>nf :NERDTreeFind<CR>
-
 ""当NERDTree为剩下的唯一窗口时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "autocmd BufEnter * if 0 == len(filter(range(1, winnr('$')), 'empty(getbufvar(winbufnr(v:val), "&bt"))')) | qa! | endif
 
+nnoremap <F3> :NERDTreeToggle<CR>                           " 开启/关闭nerdtree快捷键"
+nmap <leader>t :NERDTreeToggle<CR>                          " 关闭NERDTree快捷键
+nmap <leader>nt :NERDTreeFind<CR>
+
+
 let NERDTreeAutoCenter=1
-" let NERDTreeShowLineNumbers=1             " 显示行号
-let NERDTreeShowHidden=1                    " 是否显示隐藏文件
-" let NERDTreeShowBookmarks=1                 " 开启Nerdtree时自动显示Bookmarks
-let NERDTreeWinSize=25                      " 设置宽度
+" let NERDTreeShowLineNumbers=1                             " 显示行号
+let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
+" let NERDTreeShowBookmarks=1                                 " 开启Nerdtree时自动显示Bookmarks
+let NERDTreeWinSize=25                                      " 设置宽度
 let NERDTreeChDirMode=0
 " let NERDTreeQuitOnOpen=1
 let NERDTreeQuitOnOpen=0
 let NERDTreeMouseMode=2
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']    " 忽略一下文件的显示
-let g:nerdtree_tabs_open_on_console_startup=1           " 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1               " 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_gui_startup=0
 "修改树的显示图标
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
-let g:nerdtree_tabs_open_on_gui_startup=0
 let g:NERDTreeGitStatusIndicatorMapCustom ={
 			\ "Modified"  : "Mdf",
 			\ "Staged"    : "Stg",
