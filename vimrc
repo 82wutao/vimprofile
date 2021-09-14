@@ -237,9 +237,7 @@ call plug#begin('~/.vim/plugged')                           " 在这里面输入
 Plug 'junegunn/vim-plug'                                    " for :hlep vim-plug
 
 " About assistance
-""Plug 'scrooloose/nerdtree'                                  " 代码目录树，及结点的增删改查
 Plug 'preservim/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'farmergreg/vim-lastplace'                             " 重新打开文件时定位到上次关闭时的位置
@@ -316,6 +314,7 @@ autocmd vimenter * if !argc()|NERDTree|endif
 
 nmap <leader>t :NERDTreeToggle<CR>                          " 关闭NERDTree快捷键
 nmap <leader>nt :NERDTreeFind<CR>
+nnoremap <F3> :NERDTreeToggle<CR> " 开启/关闭nerdtree快捷键"
 "nnoremap <leader>nt :NERDTreeToggle<CR> 
 "nnoremap <leader>nf :NERDTreeFind<CR>
 
@@ -340,23 +339,22 @@ let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 let g:nerdtree_tabs_open_on_gui_startup=0
 let g:NERDTreeGitStatusIndicatorMapCustom ={
-			\ "Modified"  : "✹",
-			\ "Staged"    : "✚",
-			\ "Untracked" : "✭",
-			\ "Renamed"   : "➜",
-			\ "Unmerged"  : "═",
-			\ "Deleted"   : "✖",
-			\ "Dirty"     : "✗",
-			\ "Clean"     : "✔︎",
-			\ 'Ignored'   : '☒',
-			\ "Unknown"   : "?"
+			\ "Modified"  : "Mdf",
+			\ "Staged"    : "Stg",
+			\ "Untracked" : "Utr",
+			\ "Renamed"   : "Rnm",
+			\ "Unmerged"  : "Umg",
+			\ "Deleted"   : "Del",
+			\ "Dirty"     : "Dty",
+			\ "Clean"     : "Cln",
+			\ 'Ignored'   : 'Ign',
+			\ "Unknown"   : "Ukn"
 			\ }
 
 " Making it prettier
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-nnoremap <F3> :NERDTreeToggle<CR> " 开启/关闭nerdtree快捷键"
 " --------------------------
 " syntastic 配置
 " --------------------------
