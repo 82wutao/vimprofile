@@ -279,11 +279,10 @@ Plug 'jiangmiao/auto-pairs'                                 " 自动匹配成对
 
 
 " About efficiency
-Plug 'w0rp/ale'                                             " 代码静态检查，代码格式修正, 见配置并需要安装各语言依赖, 如flake8
-" Plug 'dense-analysis/ale'                                 " 代码静态检查，代码格式修正, 见配置并需要安装各语言依赖, 如flake8
+Plug 'dense-analysis/ale'                                             " 代码静态检查，代码格式修正, 见配置并需要安装各语言依赖, 如flake8
+""Plug 'vim-syntastic/syntastic'
 "Plug 'octol/vim-cpp-enhanced-highlight'
 "
-Plug 'vim-syntastic/syntastic'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
@@ -372,21 +371,21 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0 DO NOT enable this featu
 " --------------------------
 " syntastic 配置
 " --------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height = 5
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-function! ToggleErrors()          " 设置每次w保存后语法检查
-    Errors
-endfunction
-autocmd WinEnter * if &buftype ==#'quickfix' && winnr('$') == 1 | quit |endif
-autocmd WinLeave * lclose
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_loc_list_height = 5
+"let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+"function! ToggleErrors()          " 设置每次w保存后语法检查
+"    Errors
+"endfunction
+"autocmd WinEnter * if &buftype ==#'quickfix' && winnr('$') == 1 | quit |endif
+"autocmd WinLeave * lclose
 
 " ---------------------
 " indentLine
@@ -454,9 +453,6 @@ let g:airline_symbols.crypt = "CR"
 
 
 
-" 设置字体 "
-"set guifont=Powerline_Consolas:h14:cANSI
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tags
 set tags=./.tags;,.tags
@@ -516,14 +512,14 @@ hi! SpellRare gui=undercurl guisp=magenta
 let g:ale_linters = {
             \   'cpp': ['cppcheck','clang','gcc'],
             \   'c': ['cppcheck','clang', 'gcc'],
-            \   'python': ['flake8'],
-            \   'rust': [ 'cargo', 'rls', 'rustc' ],
+            \   'python': ['pylint'],
             \   'bash': ['shellcheck'],
             \   'go': ['golint'],
             \   'javascript': ['eslint'],
             \}
-let g:ale_linters_ignore = {'python': ['pylint']}
-let g:ale_rust_rls_toolchain = 'nightly'
+""            \   'rust': [ 'cargo', 'rls', 'rustc' ],
+""let g:ale_linters_ignore = {'python': ['pylint']}
+""let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_fixers = {
             \   'python': ['autopep8', 'black', 'isort'],
             \   'rust': ['rustfmt'],
