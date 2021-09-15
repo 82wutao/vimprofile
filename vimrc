@@ -67,17 +67,17 @@ set vb t_vb=                                " 开启视觉bell，但设置了一
 filetype indent on
 " cinoptions （C 语言缩进的具体方式，请参考:help cinoptions-values）；
 " paste （粘贴模式，会取消所有上述选项的影响来保证后面的操作——通常是从剪贴板粘贴代码——保持原有代码的风格；使用 nopaste 取消设置）。
-set autoindent                              " autoindent （自动缩进，即每行的缩进值与上一行相等；使用 noautoindent 取消设置）；
-" set cindent
 set nocindent                               " cindent （使用 C 语言的缩进方式，根据特殊字符如“{”、“}”、“:”和语句是否结束等信息自动调整缩进；在编辑 C/C++ 等类型文件时会自动设定；使用 nocindent 取消设置）；
+" set cindent
+set autoindent                              " autoindent （自动缩进，即每行的缩进值与上一行相等；使用 noautoindent 取消设置）；
 " set smartindent
-
 set tabstop=4                               " tabstop（制表符的宽度）；
 set expandtab                               " expandtab （是否在缩进和遇到 Tab 键时使用空格替代；使用 noexpandtab 取消设置）；
 " set smarttab                                  " 根据文件中其他地方的缩进空格个数来确定一个 tab 是多少个空格
 set softtabstop=4                           " softtabstop（软制表符宽度，设置为非零数值后使用 Tab 键和 Backspace 时光标移动的格数等于该数值，但实际插入的字符仍受 tabstop 和 expandtab 控制）；
 set shiftwidth=4                            " 缩进的空格数
 set shiftround
+
 autocmd FileType c,java,cpp set ai et ts=4 sw=4 sts=4
 autocmd FileType shell,bash,vim set ai et ts=4 sw=4 sts=4
 autocmd FileType js,javascript,html,css,xml,vue set ai et ts=4 sw=4 sts=4
@@ -304,8 +304,8 @@ Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 call plug#end()
 
 syntax enable
-filetype plugin indent on
 filetype on
+filetype plugin indent on
 
 " -----------------------------
 " NERDTree
@@ -476,8 +476,6 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 " ------------------------------------------------
 " For ale
-" 使用 flake8 做python3的代码检查，pylint检查太严格
-" 使用 autopep8, yapf等做代码修正，快捷键定义为 ,pe
 " normal下sp, sn跳转到上一个，下一个错误，lc关闭或者打开错误列表
 " more see :help ale
 " ------------------------------------------------ 
