@@ -14,6 +14,29 @@ save_as
 upper
 lower
 
+N ormal Mode: 即Vim的普通模式，我们打开Vim后进入的第一个模式即此模式。
+V isual Mode: 即Vim的Visual模式，我们在选中了一定的文本之后(通过v或者V命令)即进入此模式。
+S elect Mode: 这种模式和Visual模式相似，不过输入的文本都会替换选中的文本。在普通模式下，通过鼠标选中或者使用gH命令都可以进入此模式。
+O perator-pending Mode: 当我们输入一个操作符后(例如，d，y，c等等)，就会进入此模式。
+I nsert Mode: 即Vim的插入模式，普通模式下我们输入i(或者s,a等等)就会进入此模式。
+C ommand-line Mode: 命令行模式，我们在普通模式下输入:或者/等就会进入此模式。
+
+map系命令	noremap系命令	unmap系命令	mapclear系命令	生效模式
+:map	:noremap	:unmap	:mapc[lear]	Normal, Visual, Select, Operator-pending
+:nmap	:nnoremap	:nunmap	:nmapc[lear]	Normal
+:vmap	:vnoremap	:vunmap	:vmapc[lear]	Visual and Select
+:smap	:snoremap	:sunmap	:smapc[lear]	Select
+:xmap	:xnoremap	:xunmap	:xmapc[lear]	Visual
+:omap	:onoremap	:ounmap	:omapc[lear]	Operator-pending
+:map!	:noremap!	:unmap!	:mapc[lear]!	Insert and Command-line
+:imap	:inoremap	:iunmap	:imapc[lear]	Insert
+:lmap	:lnoremap	:lunmap	:lmapc[lear]	Insert, Command-line, Lang-Arg
+:cmap	:cnoremap	:cunmap	:cmapc[lear]	Command-line
+————————————————
+版权声明：本文为CSDN博主「「已注销」」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/u012291393/article/details/78650512
+
+
 NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -61,6 +84,27 @@ nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+
+161 loaded_nerd_tree            不使用NerdTree脚本
+162 NERDChristmasTree           让Tree把自己给装饰得多姿多彩漂亮点
+163 NERDTreeAutoCenter          控制当光标移动超过一定距离时，是否自动将焦点调整到屏中心
+164 NERDTreeAutoCenterThreshold 与NERDTreeAutoCenter配合使用
+165 NERDTreeCaseSensitiveSort   排序时是否大小写敏感
+166 NERDTreeChDirMode           确定是否改变Vim的CWD
+167 NERDTreeHighlightCursorline 是否高亮显示光标所在行
+168 NERDTreeHijackNetrw         是否使用:edit命令时打开第二NerdTree
+169 NERDTreeIgnore              默认的“无视”文件
+170 NERDTreeBookmarksFile       指定书签文件
+171 NERDTreeMouseMode           指定鼠标模式（1.双击打开；2.单目录双文件；3.单击打开）
+172 NERDTreeQuitOnOpen          打开文件后是否关闭NerdTree窗口
+173 NERDTreeShowBookmarks       是否默认显示书签列表
+174 NERDTreeShowFiles           是否默认显示文件
+175 NERDTreeShowHidden          是否默认显示隐藏文件
+176 NERDTreeShowLineNumbers     是否默认显示行号
+177 NERDTreeSortOrder           排序规则
+178 NERDTreeStatusline          窗口状态栏
+179 NERDTreeWinPos              窗口位置（'left' or 'right'）
+180 NERDTreeWinSize             窗口宽
 ======================================================================================================
 NERDTree-git-plugin
 

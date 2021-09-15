@@ -190,7 +190,6 @@ nmap <leader>es :sp %%
 nmap <leader>ev :vsp %%
 
 
-
 " 4 buffer
 " 映射切换buffer的键位"
 nnoremap [b :bp<CR>
@@ -213,15 +212,18 @@ map <leader>9 :b 9<CR>
 au BufWinLeave *.py,*.go,*.h,*.c,*.hpp,*.cpp,*.css,*.html,*.js,*.ts,*php,*.md mkview
 au BufWinEnter *.py,*.go,*.h,*.c,*.hpp,*.cpp,*.css,*.html,*.js,*.ts,*php,*.md silent loadview
 
+nnoremap fmt gg<S-v><S-g>=
+
+
 
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-	" Recently vim can merge signcolumn and number column into one
-	set signcolumn=number
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
 else
-	set signcolumn=yes
+    set signcolumn=yes
 endif
 
 " 屏幕左移和右移
@@ -281,7 +283,7 @@ Plug 'w0rp/ale'                                             " 代码静态检查
 " Plug 'dense-analysis/ale'                                 " 代码静态检查，代码格式修正, 见配置并需要安装各语言依赖, 如flake8
 "Plug 'octol/vim-cpp-enhanced-highlight'
 "
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
@@ -307,64 +309,82 @@ filetype plugin indent on
 filetype on
 
 " -----------------------------
-" 文件树设置
+" NERDTree
 " -----------------------------
-" autocmd vimenter * NERDTree  "自动开启Nerdtree
-autocmd vimenter * if !argc()|NERDTree|endif
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+            \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+
 ""当NERDTree为剩下的唯一窗口时自动关闭
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"autocmd BufEnter * if 0 == len(filter(range(1, winnr('$')), 'empty(getbufvar(winbufnr(v:val), "&bt"))')) | qa! | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-nnoremap <F3> :NERDTreeToggle<CR>                           " 开启/关闭nerdtree快捷键"
-nmap <leader>t :NERDTreeToggle<CR>                          " 关闭NERDTree快捷键
-nmap <leader>nt :NERDTreeFind<CR>
+"nnoremap <leader>n :NERDTreeFocus<CR>
+"nnoremap <C-n> :NERDTree<CR>
+"nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 
-
-let NERDTreeAutoCenter=1
-" let NERDTreeShowLineNumbers=1                             " 显示行号
-let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
-" let NERDTreeShowBookmarks=1                                 " 开启Nerdtree时自动显示Bookmarks
+" setting about UI
+let NERDTreeAutoCenter=1                                      " 控制当光标移动超过一定距离时，是否自动将焦点调整到屏中心
+"NERDTreeAutoCenterThreshold                          " 配合autocenter 使用
 let NERDTreeWinSize=25                                      " 设置宽度
-let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=0                          " Close NERDTree when files was opened
 " let NERDTreeQuitOnOpen=1
-let NERDTreeQuitOnOpen=0
-let NERDTreeMouseMode=2
+let NERDTreeMinimalUI = 1                                   " Start NERDTree in mini UI mode, no help lines
+let NERDTreeDirArrows = 1
+"let NERDTreeChDirMode = 2                                " Change current working directory on root directory in NERDTree
+let NERDTreeChDirMode=0
+
+let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
+" let NERDTreeShowLineNumbers=1                             " 显示行号
+" let NERDTreeShowBookmarks=1                                 " 开启Nerdtree时自动显示Bookmarks
+let NERDTreeMouseMode=2                                       " 1 doubleClick open; 2 click for dir, doubleClick for file; 3 click
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']    " 忽略一下文件的显示
-let g:nerdtree_tabs_open_on_console_startup=1               " 在终端启动vim时，共享NERDTree
-let g:nerdtree_tabs_open_on_gui_startup=0
-"修改树的显示图标
+
+
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
+"修改树的显示图标
 let g:NERDTreeGitStatusIndicatorMapCustom ={
-			\ "Modified"  : "Mdf",
-			\ "Staged"    : "Stg",
-			\ "Untracked" : "Utr",
-			\ "Renamed"   : "Rnm",
-			\ "Unmerged"  : "Umg",
-			\ "Deleted"   : "Del",
-			\ "Dirty"     : "Dty",
-			\ "Clean"     : "Cln",
-			\ 'Ignored'   : 'Ign',
-			\ "Unknown"   : "Ukn"
-			\ }
+            \ "Modified"  : "Mdf",
+            \ "Staged"    : "Stg",
+            \ "Untracked" : "Utr",
+            \ "Renamed"   : "Rnm",
+            \ "Unmerged"  : "Umg",
+            \ "Deleted"   : "Del",
+            \ "Dirty"     : "Dty",
+            \ "Clean"     : "Cln",
+            \ 'Ignored'   : 'Ign',
+            \ "Unknown"   : "Ukn"
+            \ }
 
-" Making it prettier
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+let g:NERDTreeGitStatusUseNerdFonts = 0 " you should install nerdfonts by yourself. default: 0
+let g:NERDTreeGitStatusShowIgnored = 0  " a heavy feature may cost much more time. default: 0
+
+let g:NERDTreeGitStatusUntrackedFilesMode = 'normal' " all is a heavy feature too. default: normal
+"let g:NERDTreeGitStatusGitBinPath = '/your/file/path' " default: git (auto find in path)
+let g:NERDTreeGitStatusShowClean = 1 " default: 0
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0 DO NOT enable this feature if you have also installed vim-devicons.
 
 " --------------------------
 " syntastic 配置
 " --------------------------
-function! ToggleErrors()          " 设置每次w保存后语法检查
-    Errors
-endfunction
-let g:syntastic_check_on_open=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height = 5
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+function! ToggleErrors()          " 设置每次w保存后语法检查
+    Errors
+endfunction
 autocmd WinEnter * if &buftype ==#'quickfix' && winnr('$') == 1 | quit |endif
 autocmd WinLeave * lclose
 
@@ -386,23 +406,23 @@ let g:airline#extensions#tabline#buffer_nr_show = 1  " tabline中buffer显示编
 let g:airline#extensions#tabline#formatter = 'default'    
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
-       \ '0': '0 ',
-       \ '1': '1 ',
-       \ '2': '2 ',
-       \ '3': '3 ',
-       \ '4': '4 ',
-       \ '5': '5 ',
-       \ '6': '6 ',
-       \ '7': '7 ',
-       \ '8': '8 ',
-       \ '9': '9 '
-       \}
+            \ '0': '0 ',
+            \ '1': '1 ',
+            \ '2': '2 ',
+            \ '3': '3 ',
+            \ '4': '4 ',
+            \ '5': '5 ',
+            \ '6': '6 ',
+            \ '7': '7 ',
+            \ '8': '8 ',
+            \ '9': '9 '
+            \}
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#keymap#enabled = 1
 let g:airline_skip_empty_sections = 1
-     
+
 " 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -448,7 +468,7 @@ let g:gutentags_ctags_tagfile = '.tags'
 
 let s:vim_tags = expand('~/.cache/tags') " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
 if !isdirectory(s:vim_tags)              " 检测 ~/.cache/tags 不存在就新建
-	silent! call mkdir(s:vim_tags, 'p')
+    silent! call mkdir(s:vim_tags, 'p')
 endif
 let g:gutentags_cache_dir = s:vim_tags
 
@@ -494,25 +514,25 @@ hi! SpellRare gui=undercurl guisp=magenta
 
 
 let g:ale_linters = {
-\   'cpp': ['cppcheck','clang','gcc'],
-\   'c': ['cppcheck','clang', 'gcc'],
-\   'python': ['flake8'],
-\   'rust': [ 'cargo', 'rls', 'rustc' ],
-\   'bash': ['shellcheck'],
-\   'go': ['golint'],
-\   'javascript': ['eslint'],
-\}
+            \   'cpp': ['cppcheck','clang','gcc'],
+            \   'c': ['cppcheck','clang', 'gcc'],
+            \   'python': ['flake8'],
+            \   'rust': [ 'cargo', 'rls', 'rustc' ],
+            \   'bash': ['shellcheck'],
+            \   'go': ['golint'],
+            \   'javascript': ['eslint'],
+            \}
 let g:ale_linters_ignore = {'python': ['pylint']}
 let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_fixers = {
-\   'python': ['autopep8', 'black', 'isort'],
-\   'rust': ['rustfmt'],
-\   'javascript': ['eslint'],
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\}
+            \   'python': ['autopep8', 'black', 'isort'],
+            \   'rust': ['rustfmt'],
+            \   'javascript': ['eslint'],
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \}
 let g:ale_set_quickfix = 1
 let g:ale_open_list = 1 "打开quitfix对话框 
- 
+
 
 nmap sp <Plug>(ale_previous_wrap)
 nmap sn <Plug>(ale_next_wrap)
@@ -543,11 +563,11 @@ if isdirectory(expand("~/.vim/plugged/ctrlp.vim/"))
     endif
     let g:ctrlp_user_command = {
                 \ 'types': {
-                \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-                \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-                \ },
-                \ 'fallback': s:ctrlp_fallback
-                \ }
+                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+                    \ },
+                    \ 'fallback': s:ctrlp_fallback
+                    \ }
     if isdirectory(expand("~/.vim/plugged/ctrlp-funky/"))
         " CtrlP extensions
         let g:ctrlp_extensions = ['funky']
@@ -583,22 +603,22 @@ let g:CoolTotalMatches = 1
 " http://www.wklken.me/posts/2015/06/07/vim-plugin-rainbowparentheses.html
 " ------------------------------------------------
 let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 au VimEnter * RainbowParenthesesToggle
@@ -652,33 +672,33 @@ autocmd FileType apache setlocal commentstring=#\ %s
 " ------------------------------------------------
 nnoremap <leader>tt :TagbarToggle<CR>
 let g:tagbar_type_go = {
-                        \ 'ctagstype' : 'go',
-                        \ 'kinds'     : [
-                        \ 'p:package',
-                        \ 'i:imports:1',
-                        \ 'c:constants',
-                        \ 'v:variables',
-                        \ 't:types',
-                        \ 'n:interfaces',
-                        \ 'w:fields',
-                        \ 'e:embedded',
-                        \ 'm:methods',
-                        \ 'r:constructor',
-                        \ 'f:functions'
-                        \ ],
-                        \ 'sro' : '.',
-                        \ 'kind2scope' : {
-                        \ 't' : 'ctype',
-                        \ 'n' : 'ntype'
-                        \ },
-                        \ 'scope2kind' : {
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+                \ 'p:package',
+                \ 'i:imports:1',
+                \ 'c:constants',
+                \ 'v:variables',
+                \ 't:types',
+                \ 'n:interfaces',
+                \ 'w:fields',
+                \ 'e:embedded',
+                \ 'm:methods',
+                \ 'r:constructor',
+                \ 'f:functions'
+                \ ],
+                \ 'sro' : '.',
+                \ 'kind2scope' : {
+                    \ 't' : 'ctype',
+                    \ 'n' : 'ntype'
+                    \ },
+                    \ 'scope2kind' : {
                         \ 'ctype' : 't',
                         \ 'ntype' : 'n'
                         \ },
                         \ 'ctagsbin'  : 'gotags',
                         \ 'ctagsargs' : '-sort -silent'
                         \ }
-                        
+
 
 
 " --------------------------------------------------------
@@ -764,22 +784,22 @@ hi LineNr ctermbg=black
 " theme
 " -----------------
 let g:PaperColor_Theme_Options = {
-    \ 'theme':{
-        \ 'default':{
+            \ 'theme':{
+            \ 'default':{
             \ 'transparent_background':0,
             \ 'override':{},
             \ 'allow_bold':0,
             \ 'allow_italic':0,
-        \ }
-    \ },
-    \ 'language':{
-        \ 'python':{'highlight_builtins':1},
-        \ 'cpp':{'highlight_standard_library':1},
-        \ 'c':{'highlight_builtins':1},
-        \ 'go':{'highlight_builtins':1},
-        \ 'sh':{}
-    \ }
-\ }
+            \ }
+            \ },
+            \ 'language':{
+            \ 'python':{'highlight_builtins':1},
+            \ 'cpp':{'highlight_standard_library':1},
+            \ 'c':{'highlight_builtins':1},
+            \ 'go':{'highlight_builtins':1},
+            \ 'sh':{}
+            \ }
+            \ }
 
 set termguicolors
 set background=light
