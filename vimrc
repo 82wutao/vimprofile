@@ -481,26 +481,12 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " normal下sp, sn跳转到上一个，下一个错误，lc关闭或者打开错误列表
 " more see :help ale
 " ------------------------------------------------ 
-let g:ale_linters_explicit = 1                        "除g:ale_linters指定，其他不可用
-
-let g:ale_completion_delay = 500
-let g:ale_echo_delay = 20
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_delay = 500
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_enter = 0
-
-let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
-
-let g:ale_set_hightlights = 1
-let g:ale_change_sign_column_color = 0
-let g:ale_sign_error = "EE"
 let g:ale_sign_column_always = 0 
+"let g:ale_sign_column_always = 1
 
+"let g:ale_set_highlights = 0
+let g:ale_set_highlights = 1
+let g:ale_change_sign_column_color = 0
 hi! clear SpellBad
 hi! clear SpellCap
 hi! clear SpellRare
@@ -509,9 +495,88 @@ hi! SpellCap gui=undercurl guisp=blue
 hi! SpellRare gui=undercurl guisp=magenta
 
 
+"自定义error和warning图标
+"let g:ale_sign_error = "EE"
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+"显示Linter名称,出错或警告等相关信息
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] [%severity%]  %code% : %s'
+
+" Write this in your vimrc file
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1 "打开quitfix对话框 
+" Set this if you want to.
+" This can be useful if you are combining ALE with some other plugin which sets quickfix errors, etc.
+let g:ale_keep_list_window_open = 0
+"let g:ale_list_vertical = 1
+
+
+"let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK'] "在vim自带的状态栏中整合ale
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}\ %{ALEGetStatusLine()} "设置状态栏显示的内容
+
+"如果你有使用airline的话，会发现airline默认也能显示ale相关的symbol，error对应的是”E”，warning对应的是”W”，
+"如果你想把自定义的error和warning图标整合到airline的话，
+"需要修改~/.vim/plugged/vim-airline/autoload/airline/extensions/ale.vim这个文件，方法是打开上面提到的ale.vim文件，找到下面这两句并注释掉
+"let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', 'E:')
+"let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', 'W:')
+"然后再添加下面这两句就可以了
+"let s:error_symbol = get(g:, 'airline#extensions#ale#error_symbol', '✗ ')
+"let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', '⚡ ')
+
+
+
+"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp  <Plug>(ale_previous_wrap)
+nmap sn  <Plug>(ale_next_wrap)
+        
+nmap <Leader>at :ALEToggle<CR>        "<Leader>s触发/关闭语法检查
+nmap <Leader>ad :ALEDetail<CR>         "<Leader>d查看错误或警告的详细信息
+
+
+
+let g:ale_linters_explicit = 1                        "除g:ale_linters指定，其他不可用
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+
+let g:ale_lint_delay = 500
+
+let g:ale_lint_on_save =0              "default this is 1,if u only wish lint on save  turn off following
+let g:ale_lint_on_text_changed = 'never' " Write this in your vimrc file            another option:   normal
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0         " if you don't want linters to run on opening a file
+
+
+" *****How can I configure my C or C++ project?
+" 项目结构不同，编译容易，编译参数不容易
+"The structure of C and C++ projects varies wildly from project to project, with many different build tools being used for building them, and many different formats for project configuration files. 
+" ALE can run compilers easily, but ALE cannot easily detect which compiler flags to use.
+
+"Some tools and build configurations can generate compile_commands.json files. 
+"The cppcheck, clangcheck, clangtidy and cquery linters can read these files for automatically determining the appropriate compiler flags to use.
+
+" For linting with compilers like gcc and clang, and with other tools, you will need to tell ALE which compiler flags to use yourself. 
+" You can use different options for different projects with the g:ale_pattern_options setting. Consult the documentation for that setting for more information. 
+" b:ale_linters can be used to select which tools you want to run, say if you want to use only gcc for one project, and only clang for another.
+
+"ALE will attempt to parse compile_commands.json files to discover compiler flags to use when linting code. See :help g:ale_c_parse_compile_commands for more information. 
+"See Clang's documentation for compile_commands.json files. You should strongly consider generating them in your builds, which is easy to do with CMake.
+
+"You can also configure ALE to automatically run make -n to run dry runs on Makefiles to discover compiler flags. 
+" This can execute arbitrary code, so the option is disabled by default. See :help g:ale_c_parse_makefile.
+
+"You may also configure buffer-local settings for linters with project-specific vimrc files. local_vimrc can be used for executing local vimrc files which can be shared in your project.
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
 let g:ale_linters = {
-            \   'cpp': ['cppcheck','clang','gcc'],
-            \   'c': ['cppcheck','clang', 'gcc'],
+            \   'cpp': ['clang','gcc'],
+            \   'c': ['clang', 'gcc'],
             \   'python': ['pylint'],
             \   'bash': ['shellcheck'],
             \   'go': ['golint'],
@@ -522,18 +587,23 @@ let g:ale_linters = {
 ""let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_fixers = {
             \   'python': ['autopep8', 'black', 'isort'],
-            \   'rust': ['rustfmt'],
             \   'javascript': ['eslint'],
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
             \}
-let g:ale_set_quickfix = 1
-let g:ale_open_list = 1 "打开quitfix对话框 
+"\   'rust': ['rustfmt'],
 
 
-nmap sp <Plug>(ale_previous_wrap)
-nmap sn <Plug>(ale_next_wrap)
-nnoremap <leader>at :ALEToggle<CR>
-nnoremap <leader>af :ALEFix<cr>
+" ALE supports jumping to the definition of words under your cursor with the :ALEGoToDefinition command using any enabled Language Server Protocol linters and tsserver.
+" ALE supports finding references for words under your cursor with the :ALEFindReferences command using any enabled Language Server Protocol linters and tsserver.
+" ALE supports "hover" information for printing brief information about symbols at the cursor taken from Language Server Protocol linters and tsserver with the ALEHover command.
+"          Truncated information will be displayed when the cursor rests on a symbol by default, as long as there are no problems on the same line.
+
+" ALE supports searching for workspace symbols via Language Server Protocol linters with the ALESymbolSearch command.
+"          Search queries can be performed to find functions, types, and more which are similar to a given query string.
+
+" **refator
+" ALE supports renaming symbols in symbols in code such as variables or class names with the ALERename command.
+" ALECodeAction will execute actions on the cursor or applied to a visual range selection, such as automatically fixing errors.
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctrlp 和 Ctrlp-funky(,fu)
