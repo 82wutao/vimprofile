@@ -1,0 +1,1 @@
+bind shortcut to keymap
