@@ -269,4 +269,12 @@ endif
 " 在由当前文件（如#include）包含进来的头文件中进行查找。
 
 
+"  模板"
+"  shortcut
 nnoremap fmt gg<S-v><S-g>=
+" motion in line 
+"   h/l char; 
+"   w beingOfNextWord;W beginOfNextContinueChars
+"   e endOfNextWord;  E endOfNextContinueChars"
+"   b beginOfPreWord; B beginOfPreContinueChars
+"   ^ beginOfCurLine; $ endOfCurLine
