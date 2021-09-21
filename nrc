@@ -1,3 +1,0 @@
-let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-exec 'set rtp+='.s:home
-set rtp+=~/.vim
