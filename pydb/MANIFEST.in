@@ -1,0 +1,8 @@
+# 所有根目录下的txt都会分发
+include *.txt
+
+# 在example 目录递归遇到 txt py文件分发
+recursive-include example *.txt *.py
+
+# 路径匹配，这个路径模式的文件/目录都不会分发
+prune example/sample?/build
