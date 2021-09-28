@@ -272,6 +272,9 @@ endif
 "  模板"
 "  shortcut
 nnoremap fmt gg<S-v><S-g>=
+nnoremap cc  I// <ESC> 
+nnoremap xc  :.s/\/\/ //<CR>
+nnoremap <A-k> dd 
 " motion in line 
 "   h/l char; 
 "   w beingOfNextWord;W beginOfNextContinueChars
