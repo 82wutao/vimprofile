@@ -18,8 +18,6 @@ let maplocalleader = '_'                    " 本地leader设置 这个leader用
 " set backspace=2                             " 解决插入模式下delete/backspce键失效问题
 set backspace=indent,eol,start              " 缩进位置”，“行结束符”，“段首”。这样设置可以使得 backspace 键在这三个特殊的位置也能进行回删动作。
 
-" 关闭自动换行
-set nowrap
 
 " 设置分隔符可视
 set list                                    " 开启对于制表符（tab）、行尾空格符（trail）、行结束符（eol）等等特殊符号的回显
@@ -137,14 +135,25 @@ set cindent
 "----------------------------------------------------------------------
 " 默认缩进模式（可以后期覆盖）
 "----------------------------------------------------------------------
+set expandtab
+set smarttab
+
 " 设置缩进宽度
 set sw=4
 " 设置 TAB 宽度
 set ts=4
 " 禁止展开 tab (noexpandtab)
-set noet
+"set noet
 " 如果后面设置了 expandtab 那么展开 tab 为多少字符
 set softtabstop=4
+
+set lbr
+set tw=500
+
+set ai
+set si
+set wrap
+" set nowrap
 
 augroup PythonTab
 	au!
