@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')                           " 在这里面输入
 Plug 'xolox/vim-misc'
 
 Plug 'mhinz/vim-startify'                                   " cowsay and 数字键打开历史文件
+
 " style
 " 一次性安装一大堆 colorscheme
 "Plug 'flazz/vim-colorschemes'
@@ -34,30 +35,30 @@ Plug 'tacahiroy/ctrlp-funky'
 Plug 'tpope/vim-fugitive'
 
 " 2 txt editing
-Plug 'farmergreg/vim-lastplace'                             " 重新打开文件时定位到上次关闭时的位置
-Plug 'mhinz/vim-signify'                                    " Just for git, <leader>se <leader>sd <leader>st
+
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'jiangmiao/auto-pairs'                                 " 自动匹配成对字符如括号等
 Plug 'tpope/vim-commentary'                                 " gcc 注释单行，gc 注释选中的行
-" 表格对齐，使用命令 Tabularize
-Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+Plug 'godlygeek/tabular', { 'on': 'Tabularize' }            " 表格对齐，使用命令 Tabularize
 Plug 'Yggdroot/indentLine'
+Plug 'farmergreg/vim-lastplace'                             " 重新打开文件时定位到上次关闭时的位置
 
 Plug 'SirVer/ultisnips'                                     " 代码片段 配合vim-snippets and coc-nvim
 Plug 'honza/vim-snippets'                                   " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
 
 " 3 diff comparing
-" Diff 增强，支持 histogram / patience 等更科学的 diff 算法
-Plug 'chrisbra/vim-diff-enhanced'
+Plug 'chrisbra/vim-diff-enhanced'                           " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
+Plug 'mhinz/vim-signify'                                    " Just for git, <leader>se <leader>sd <leader>st
 
 " 4 code completing
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dgryski/vim-godef'
 Plug 'buoto/gotests-vim'
+
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } "写python语言的各种操作, 见配置a
-Plug 'yssource/python.vim'                                  " python 推荐：****
-" vim org-mode
-Plug 'jceb/vim-orgmode', { 'for': 'org' }
+"Plug 'yssource/python.vim'                                  " python 推荐：****
+"Plug 'jceb/vim-orgmode', { 'for': 'org' }
+
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}                      " for html coding
 
 
@@ -66,21 +67,17 @@ Plug 'dense-analysis/ale'                                             " 代码�
 " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
 " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
 Plug 'mh21/errormarker.vim'
-" 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
-Plug 'skywind3000/vim-preview'
-" lua 语法高亮增强
-Plug 'tbastos/vim-lua', { 'for': 'lua' }
+" Plug 'tbastos/vim-lua', { 'for': 'lua' }                    " lua 语法高亮增强
 " C++ 语法高亮增强，支持 11/14/17 标准
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
 " 额外语法文件
 Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
-" python 语法文件增强
-Plug 'vim-python/python-syntax', { 'for': ['python'] }
+Plug 'vim-python/python-syntax', { 'for': ['python'] }      " python 语法文件增强
 
 " 5 symbol preview
 Plug 'majutsushi/tagbar'                                    " 代码函数变量预览
-" 提供 ctags/gtags 后台数据库自动更新功能
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/vim-preview'                              " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
+Plug 'ludovicchabant/vim-gutentags'                         " 提供 ctags/gtags 后台数据库自动更新功能
 " 提供 GscopeFind 命令并自动处理好 gtags 数据库切换
 " 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
 Plug 'skywind3000/gutentags_plus'
@@ -231,14 +228,14 @@ let g:indent_guides_size = 1
 let g:indent_guides_level = 2
 
 
+" let g:airline_theme='deus'
 " let g:airline_left_sep = ''
 " let g:airline_left_alt_sep = ''
 " let g:airline_right_sep = ''
 " let g:airline_right_alt_sep = ''
-" let g:airline_powerline_fonts = 0
+" let g:airline_powerline_fonts = 1
 " let g:airline_exclude_preview = 1
 " let g:airline_section_b = '%n'
-" let g:airline_theme='deus'
 " let g:airline#extensions#branch#enabled = 0
 " let g:airline#extensions#syntastic#enabled = 0
 " let g:airline#extensions#fugitiveline#enabled = 0
@@ -247,9 +244,9 @@ let g:indent_guides_level = 2
 
 " airline设置"
 let g:airline_theme='papercolor'                     " 设置主题
-let g:airline_powerline_fonts = 1                    " 使用powerline打过补丁的字体
+let g:airline_powerline_fonts = 0                    " 使用powerline打过补丁的字体
 let g:airline#extensions#tabline#enabled = 1         " 开启tabline
-let g:airline#extensions#tabline#left_sep = ' '      " tabline中当前buffer两端的分隔字符
+let g:airline#extensions#tabline#left_sep = '*'      " tabline中当前buffer两端的分隔字符
 let g:airline#extensions#tabline#left_alt_sep = '|'  " tabline中未激活buffer两端的分隔字符
 let g:airline#extensions#tabline#buffer_nr_show = 1  " tabline中buffer显示编号
 let g:airline#extensions#tabline#formatter = 'default'
@@ -270,7 +267,7 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#keymap#enabled = 1
-let g:airline_skip_empty_sections = 1
+let g:airline_skip_empty_sections = 0
 
 " 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 nmap <leader>1 <Plug>AirlineSelectTab1
@@ -288,18 +285,19 @@ nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
 " 设置切换tab的快捷键 <\> + <q> 退出当前的 tab
 nmap <leader>q :bp<cr>:bd #<cr>
+
 " 修改了一些个人不喜欢的字符
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let g:airline_symbols.linenr = "CL" " current line
+let g:airline_symbols.linenr = " CL" " current line
 let g:airline_symbols.whitespace = '|'
-let g:airline_symbols.maxlinenr = 'Ml' "maxline
+let g:airline_symbols.maxlinenr = 'ML' "maxline
 let g:airline_symbols.branch = 'BR'
 let g:airline_symbols.readonly = "RO"
-let g:airline_symbols.dirty = "DT"
-let g:airline_symbols.crypt = "CR"
+let g:airline_symbols.dirty = "Dty"
+let g:airline_symbols.crypt = "Crp"
 
 
 
@@ -353,31 +351,36 @@ let g:gutentags_auto_add_gtags_cscope = 0
 " normal下sp, sn跳转到上一个，下一个错误，lc关闭或者打开错误列表
 " more see :help ale
 " ------------------------------------------------
-let g:ale_sign_column_always = 0
-"let g:ale_sign_column_always = 1
 
+" 设定检测的时机：normal 模式文字改变，或者离开 insert模式
+" 禁用默认 INSERT 模式下改变文字也触发的设置，太频繁外，还会让补全窗闪烁
+let g:ale_lint_on_save =0                 "default this is 1,if u only wish lint on save  turn off following
+let g:ale_lint_on_enter = 0               " if you don't want linters to run on opening a file
+let g:ale_lint_on_text_changed = 'normal' " Write this in your vimrc file            another option:   never
+let g:ale_lint_on_insert_leave = 1
+
+let g:ale_linters_explicit = 1                        "除g:ale_linters指定，其他不可用
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+
+"let g:ale_sign_column_always = 0
+let g:ale_sign_column_always = 1
+let g:ale_change_sign_column_color = 1 "1/0
 "let g:ale_set_highlights = 0
 let g:ale_set_highlights = 1
-let g:ale_change_sign_column_color = 0
-hi! clear SpellBad
-hi! clear SpellCap
-hi! clear SpellRare
-hi! SpellBad gui=undercurl guisp=red
-hi! SpellCap gui=undercurl guisp=blue
-hi! SpellRare gui=undercurl guisp=magenta
-
 
 "自定义error和warning图标
 "let g:ale_sign_error = "EE"
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
 "显示Linter名称,出错或警告等相关信息
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] [%severity%]  %code% : %s'
 
 " Write this in your vimrc file
-let g:ale_set_loclist = 0
+let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 1
 let g:ale_open_list = 1 "打开quitfix对话框
 " Set this if you want to.
@@ -385,6 +388,11 @@ let g:ale_open_list = 1 "打开quitfix对话框
 let g:ale_keep_list_window_open = 0
 "let g:ale_list_vertical = 1
 
+"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp  <Plug>(ale_previous_wrap)
+nmap sn  <Plug>(ale_next_wrap)
+nmap <Leader>at :ALEToggle<CR>        "<Leader>s触发/关闭语法检查
+nmap <Leader>ad :ALEDetail<CR>         "<Leader>d查看错误或警告的详细信息
 
 "let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK'] "在vim自带的状态栏中整合ale
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}\ %{ALEGetStatusLine()} "设置状态栏显示的内容
@@ -400,25 +408,6 @@ let g:ale_keep_list_window_open = 0
 
 
 
-"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-nmap sp  <Plug>(ale_previous_wrap)
-nmap sn  <Plug>(ale_next_wrap)
-
-nmap <Leader>at :ALEToggle<CR>        "<Leader>s触发/关闭语法检查
-nmap <Leader>ad :ALEDetail<CR>         "<Leader>d查看错误或警告的详细信息
-
-
-let g:ale_linters_explicit = 1                        "除g:ale_linters指定，其他不可用
-let g:ale_completion_delay = 500
-let g:ale_echo_delay = 20
-let g:ale_lint_delay = 500
-
-" 设定检测的时机：normal 模式文字改变，或者离开 insert模式
-" 禁用默认 INSERT 模式下改变文字也触发的设置，太频繁外，还会让补全窗闪烁
-let g:ale_lint_on_save =0                 "default this is 1,if u only wish lint on save  turn off following
-let g:ale_lint_on_text_changed = 'normal' " Write this in your vimrc file            another option:   never
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_enter = 0         " if you don't want linters to run on opening a file
 
 
 
@@ -446,7 +435,8 @@ let g:ale_lint_on_enter = 0         " if you don't want linters to run on openin
 let g:ale_linters = {
             \   'c': [ 'gcc', 'cppcheck'],
             \   'cpp': ['gcc', 'cppcheck'],
-            \   'python': ['pylint'],
+            \   'python': ['pylint', 'flake8'],
+            \   'reStructuredText':['rstcheck'],
             \   'bash': ['shellcheck'],
             \   'go': ['golint','go build', 'gofmt'],
             \   'java': ['javac'],
@@ -456,7 +446,7 @@ let g:ale_linters = {
 ""let g:ale_linters_ignore = {'python': ['pylint']}
 ""let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_fixers = {
-            \   'python': ['autopep8', 'black', 'isort'],
+            \   'python': [ 'autopep8' ],
             \   'javascript': ['eslint'],
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
             \}
@@ -473,9 +463,9 @@ function s:lintcfg(name)
 	return shellescape(filereadable(path2)? path2 : path1)
 endfunc
 " 设置 flake8/pylint 的参数
-let g:ale_python_flake8_options = '--conf='.s:lintcfg('flake8.conf')
 let g:ale_python_pylint_options = '--rcfile='.s:lintcfg('pylint.conf')
 let g:ale_python_pylint_options .= ' --disable=W'
+""let g:ale_python_flake8_options = '--conf='.s:lintcfg('flake8.conf')
 
 let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
 let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'

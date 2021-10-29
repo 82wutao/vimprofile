@@ -7,11 +7,18 @@ set nocompatible
 " Windows 禁用 ALT 操作菜单（使得 ALT 可以用到 Vim里）
 set winaltkeys=no
 
+" set noerrorbells                            " dont beep
+" set visualbell                              " 视觉上的bell代替声音
+" set novisualbell                            " dont beep
+set noeb
+set vb t_vb=                                " 开启视觉bell，但设置了一个值，这个值是null，相当于禁用
+
+set lazyredraw                              " 延迟绘制（提升性能）
+
 let mapleader = '\'                         " 全局leader设置
 let maplocalleader = '_'                    " 本地leader设置 这个leader用于那些只对某类文件 （如Python文件、HTML文件）而设置的映射
 
-" 缩进折行也可以看作样式，是编辑区内的样式，或者是编辑习惯
-"
+
 
 
 " 设置 Backspace 键模式
@@ -23,17 +30,17 @@ set backspace=indent,eol,start              " 缩进位置”，“行结束符�
 set list                                    " 开启对于制表符（tab）、行尾空格符（trail）、行结束符（eol）等等特殊符号的回显
 set listchars=tab:›\ ,trail:•,extends:>,precedes:<,nbsp:.,eol:$  " 空格等无效字符显示
 " set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
-" 如遇Unicode值大于255的文本，不必等到空格再折行
-set formatoptions+=m
 
-" 合并两行中文时，不在中间加空格
-set formatoptions+=B
 
-" 文件换行符，默认使用 unix 换行符
-set ffs=unix,dos,mac
 
+" 缩进折行也可以看作样式，是编辑区内的样式，或者是编辑习惯
 set textwidth=120                           " 内容宽度
 set linebreak                               " 遇到指定的符号才折行，单词内不折行"
+
+set formatoptions+=m                        " 如遇Unicode值大于255的文本，不必等到空格再折行
+set formatoptions+=B                        " 合并两行中文时，不在中间加空格
+set ffs=unix,dos,mac                        " 文件换行符，默认使用 unix 换行符
+
 "set breakat-=_
 "set nolinebreak                            " 取消自定义折行
 set whichwrap=b,s,h,l,<,>,[,]               " 行尾可右移到下行，行首左移到上行,b：退格，s：空格，hl：左右，<>：n/v模式下的左右，[]：i/r模式下的左右
@@ -46,33 +53,20 @@ set wrapmargin=1
 
 set history=1000                            " remember more commands and search history
 set report=0                                " 如果删除或修改的行数超过了指定的值会报告，0：永远报告"
-" 打开功能键超时检测（终端下功能键为一串 ESC 开头的字符串）
-set ttimeout
-" 功能键超时检测 50 毫秒
-set ttimeoutlen=500
-" set noerrorbells                            " dont beep
-" set visualbell                              " 视觉上的bell代替声音
-" set novisualbell                            " dont beep
-set noeb
-" 开启视觉bell，但设置了一个值，这个值是null，相当于禁用
-set vb t_vb=
+set ttimeout                                " 打开功能键超时检测（终端下功能键为一串 ESC 开头的字符串）
+set ttimeoutlen=500                         " 功能键超时检测 50 毫秒
 
-" 显示匹配的括号
-set showmatch
-" 显示括号匹配的时间
-set matchtime=2
+
+set showmatch                               " 显示匹配的括号
+set matchtime=2                             " 显示括号匹配的时间
 
 
 set cmdheight=2                             " 命令行（在状态行下）的高度，默认为1，这里是2
-" 显示光标位置
-set ruler
+set ruler                                   " 显示光标位置
 
-" 显示最后一行
-set display=lastline
+set display=lastline                        " 显示最后一行
 
 
-" 延迟绘制（提升性能）
-set lazyredraw
 
 " 错误格式
 set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m
