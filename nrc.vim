@@ -203,14 +203,10 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0 DO NOT enable this featu
 " For Ctrlp And funky
 " ------------------------------------------------
 let g:ctrlp_map = ''
-" CTRL+p 打开文件模糊匹配
-noremap <c-p> :CtrlP<cr>
-" CTRL+n 打开最近访问过的文件的匹配
-noremap <c-n> :CtrlPMRUFiles<cr>
-" ALT+p 显示当前文件的函数列表
-noremap <m-p> :CtrlPFunky<cr>
-" ALT+n 匹配 buffer
-noremap <m-n> :CtrlPBuffer<cr>
+noremap <c-p> :CtrlP<cr> " CTRL+p 打开文件模糊匹配
+noremap <c-n> :CtrlPMRUFiles<cr> " CTRL+n 打开最近访问过的文件的匹配
+noremap <m-p> :CtrlPFunky<cr> " ALT+p 显示当前文件的函数列表
+noremap <m-n> :CtrlPBuffer<cr> " ALT+n 匹配 buffer
 
 " 项目标志
 let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
@@ -303,6 +299,24 @@ let g:AutoPairsMultilineClose = 1                                   "启用跳�
 " ------------------------------------------------
 " For airline
 " ------------------------------------------------
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+
+if !exists('g:airline_symbols') " 修改了一些个人不喜欢的字符
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = " LN" " current line
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.whitespace = '|'
+let g:airline_symbols.maxlinenr = 'ML' "maxline
+let g:airline_symbols.branch = 'BR'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.readonly = "RO"
+let g:airline_symbols.dirty = "Dty"
+let g:airline_symbols.crypt = "Crp"
+
 let g:airline_theme='papercolor'                     " 设置主题
 let g:airline_powerline_fonts = 0                    " 使用powerline打过补丁的字体
 let g:airline#extensions#tabline#enabled = 1         " 开启tabline
@@ -339,25 +353,11 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-" 设置切换tab的快捷键 <\> + <-> 切换到前一个 tab
-nmap <leader>- <Plug>AirlineSelectPrevTab
-" 设置切换tab的快捷键 <\> + <+> 切换到后一个 tab
-nmap <leader>+ <Plug>AirlineSelectNextTab
-" 设置切换tab的快捷键 <\> + <q> 退出当前的 tab
-nmap <leader>q :bp<cr>:bd #<cr>
+nmap <leader>- <Plug>AirlineSelectPrevTab " 设置切换tab的快捷键 <\> + <-> 切换到前一个 tab
+nmap <leader>+ <Plug>AirlineSelectNextTab " 设置切换tab的快捷键 <\> + <+> 切换到后一个 tab
+nmap <leader>q :bp<cr>:bd #<cr> " 设置切换tab的快捷键 <\> + <q> 退出当前的 tab
 
-" 修改了一些个人不喜欢的字符
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
 
-let g:airline_symbols.linenr = " CL" " current line
-let g:airline_symbols.whitespace = '|'
-let g:airline_symbols.maxlinenr = 'ML' "maxline
-let g:airline_symbols.branch = 'BR'
-let g:airline_symbols.readonly = "RO"
-let g:airline_symbols.dirty = "Dty"
-let g:airline_symbols.crypt = "Crp"
 
 " ------------------------------------------------
 " For vim-cool
@@ -397,21 +397,19 @@ let g:pymode_run_bind = '<leader>r'
 " ------------------------------------------------
 " 设定检测的时机：normal 模式文字改变，或者离开 insert模式
 " 禁用默认 INSERT 模式下改变文字也触发的设置，太频繁外，还会让补全窗闪烁
+let g:ale_linters_explicit = 1                        "除g:ale_linters指定，其他不可用
 let g:ale_lint_on_save =0                             "default this is 1,if u only wish lint on save  turn off following
 let g:ale_lint_on_enter = 0                           " if you don't want linters to run on opening a file
 let g:ale_lint_on_text_changed = 'normal'             " Write this in your vimrc file            another option:   never
 let g:ale_lint_on_insert_leave = 1
-
-let g:ale_linters_explicit = 1                        "除g:ale_linters指定，其他不可用
-let g:ale_completion_delay = 500
-let g:ale_echo_delay = 20
 let g:ale_lint_delay = 500
 
-"let g:ale_sign_column_always = 0
-let g:ale_sign_column_always = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+
+let g:ale_sign_column_always = 1       "1/0
 let g:ale_change_sign_column_color = 1 "1/0
-"let g:ale_set_highlights = 0
-let g:ale_set_highlights = 1
+let g:ale_set_highlights = 1           "1/0
 
 "let g:ale_sign_error = "EE"                          "自定义error和warning图标
 let g:ale_sign_error = 'E'
@@ -702,6 +700,8 @@ set linebreak              "只有遇到指定的符号（比如空格、连词�
 set wrapmargin=2           "指定折行处与编辑窗口的右边缘之间空出的字符数。
 set list                   "如果行尾有多余的空格（包括 Tab 键），该配置将让这些空格显示成可见的小方块。
 set listchars=tab:›\ ,trail:•,extends:>,precedes:<,nbsp:.,eol:$  " 空格等无效字符显示.set listchars=tab:»■,trail:■
+set foldmethod=indent
+set foldlevel=99
 
 " search
 set showmatch "光标遇到圆括号、方括号、大括号时，自动高亮对应的另一个圆括号、方括号和大括号。
