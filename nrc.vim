@@ -299,22 +299,20 @@ let g:AutoPairsMultilineClose = 1                                   "启用跳�
 " ------------------------------------------------
 " For airline
 " ------------------------------------------------
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
+let g:airline_left_sep = '->'
+let g:airline_left_alt_sep = '>'
+let g:airline_right_sep = '<-'
+let g:airline_right_alt_sep = '<'
 
 if !exists('g:airline_symbols') " 修改了一些个人不喜欢的字符
     let g:airline_symbols = {}
 endif
-let g:airline_symbols.linenr = " LN" " current line
-let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.linenr = " Nr" " current line
+let g:airline_symbols.maxlinenr = 'Tot' "maxline
 let g:airline_symbols.whitespace = '|'
-let g:airline_symbols.maxlinenr = 'ML' "maxline
-let g:airline_symbols.branch = 'BR'
-let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.branch = 'Branch:'
 let g:airline_symbols.readonly = "RO"
-let g:airline_symbols.dirty = "Dty"
+let g:airline_symbols.dirty = " Dty"
 let g:airline_symbols.crypt = "Crp"
 
 let g:airline_theme='papercolor'                     " 设置主题
@@ -382,14 +380,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " more see :help pymode
 " ------------------------------------------------
 let g:pymode_python = 'python3'
-let g:pymode_indent = 1
-let g:pymode_motion = 1
-let g:pymode_lint = 0
-let g:pymode_folding = 0
-let g:pymode_rope = 0
-let g:pymode_breakpoint = 0
-let g:pymode_run = 1
-let g:pymode_run_bind = '<leader>r'
+""let g:pymode_indent = 1
+""let g:pymode_motion = 1
+""let g:pymode_lint = 0
+""let g:pymode_folding = 0
+""let g:pymode_rope = 0
+""let g:pymode_breakpoint = 0
+""let g:pymode_run = 1
+""let g:pymode_run_bind = '<leader>r'
 
 " ------------------------------------------------
 " For ale
@@ -752,3 +750,13 @@ set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.bin,*.msu
 set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
 set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
 " keymap
+"manage tab/window
+"brows codes and move cursor
+"comment /decomment
+"new blank line
+
+nnoremap <leader>l o<ESC>
+nnoremap <leader>L O<ESC>
+nnoremap <leader>j ddp
+nnoremap <leader>l yykPmajjdd`a
+
