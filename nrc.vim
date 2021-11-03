@@ -18,13 +18,30 @@ set formatoptions+=m                                               " 如遇Unico
 set formatoptions+=B                                               " 合并两行中文时，不在中间加空格
 set ffs=unix,dos,mac                                               " 文件换行符，默认使用 unix 换行符
 
-" indent
-"filetype plugin indent on                                         "Vim 就是会找 Python 的缩进规则~/.vim/indent/python.vim
-set autoindent                                                     "按下回车键后，下一行的缩进会自动跟上一行的缩进保持一致。
-set expandtab                                                      "由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格。
-set softtabstop=4                                                  "Tab 转为多少个空格。
-set tabstop=4                                                      "按下 Tab 键时，Vim 显示的空格数。
+
 set shiftwidth=4                                                   "在文本上按下>>（增加一级缩进）、<<（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数。
+set shiftround                                                     "表示缩进列数对齐到shiftwidth的整数倍"
+" \s indent"
+set expandtab                                                      "由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格。
+" set smarttab 这里不用智能是因为我们要控制 插入模式下\t 移动的距离
+set tabstop=4                                                      "按下 Tab 键时，Vim 显示的空格数。
+set softtabstop=4                                                  "Tab 转为多少个空格。
+set autoindent
+set nosmarttab nocindent nosmartindent
+
+
+" " indent and \tab
+" " filetype plugin indent on                                         "Vim 就是会找 Python 的缩进规则~/.vim/indent/python.vim
+" set expandtab                                                      "由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格。
+" set smarttab                                                       "表示插入tab 时使用shiftwidth"
+" set tabstop=4                                                      "按下 Tab 键时，Vim 显示的空格数。
+" set softtabstop=4                                                  "Tab 转为多少个空格。
+" 
+" set shiftwidth=4                                                   "在文本上按下>>（增加一级缩进）、<<（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数。
+" set shiftround                                                   "表示缩进列数对齐到shiftwidth的整数倍"
+" 
+" set autoindent                                                     "按下回车键后，下一行的缩进会自动跟上一行的缩进保持一致。
+" set smartindent                                                    "设置新行，智能缩进，主要用于C语言一族。在smartindent模式下，每行缩进相同，直到}为止"
 
 
 " effective
