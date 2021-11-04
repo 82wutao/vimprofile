@@ -357,6 +357,7 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#keymap#enabled = 1
 let g:airline_skip_empty_sections = 0
+let g:airline#extensions#whitespace#enabled=0
 
 " 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 nmap <leader>1 <Plug>AirlineSelectTab1
