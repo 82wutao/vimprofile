@@ -354,12 +354,12 @@ let g:airline_symbols.readonly = "RO"
 let g:airline_symbols.dirty = " Dty"
 let g:airline_symbols.crypt = "Crp"
 
-let g:airline_theme='papercolor'                     " 设置主题
-let g:airline_powerline_fonts = 0                    " 使用powerline打过补丁的字体
+let g:airline_theme='powerlineish'                     " 设置主题
+let g:airline_powerline_fonts = 1                    " 使用powerline打过补丁的字体
 let g:airline#extensions#tabline#enabled = 1         " 开启tabline
+let g:airline#extensions#tabline#buffer_nr_show = 1  " tabline中buffer显示编号
 let g:airline#extensions#tabline#left_sep = '*'      " tabline中当前buffer两端的分隔字符
 let g:airline#extensions#tabline#left_alt_sep = '|'  " tabline中未激活buffer两端的分隔字符
-let g:airline#extensions#tabline#buffer_nr_show = 1  " tabline中buffer显示编号
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
@@ -379,6 +379,7 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#keymap#enabled = 1
 let g:airline_skip_empty_sections = 0
+let g:airline#extensions#whitespace#enabled=0
 
 " 设置切换tab的快捷键 <\> + <i> 切换到第i个 tab
 nmap <leader>1 <Plug>AirlineSelectTab1
