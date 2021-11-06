@@ -150,7 +150,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'SirVer/ultisnips'                                            " 代码片段 配合vim-snippets and coc-nvim
 Plug 'honza/vim-snippets'                                          " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
 
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } "写python语言的各种操作, 见配置a
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } "写python语言的各种操作, 见配置a
 "Plug 'yssource/python.vim'                                        " python 推荐：****
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}                           " for html coding
 
@@ -338,23 +338,12 @@ let g:AutoPairsMultilineClose = 1                                   "启用跳�
 " ------------------------------------------------
 " For airline
 " ------------------------------------------------
-let g:airline_left_sep = '->'
-let g:airline_left_alt_sep = '>'
-let g:airline_right_sep = '<-'
-let g:airline_right_alt_sep = '<'
 
 if !exists('g:airline_symbols') " 修改了一些个人不喜欢的字符
     let g:airline_symbols = {}
 endif
-let g:airline_symbols.linenr = " Nr" " current line
-let g:airline_symbols.maxlinenr = 'Tot' "maxline
-let g:airline_symbols.whitespace = '|'
-let g:airline_symbols.branch = 'Branch:'
-let g:airline_symbols.readonly = "RO"
-let g:airline_symbols.dirty = " Dty"
-let g:airline_symbols.crypt = "Crp"
 
-let g:airline_theme='powerlineish'                     " 设置主题
+let g:airline_theme='papercolor'                     " 设置主题
 let g:airline_powerline_fonts = 1                    " 使用powerline打过补丁的字体
 let g:airline#extensions#tabline#enabled = 1         " 开启tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1  " tabline中buffer显示编号
@@ -419,7 +408,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " 使用,r 运行当前python代码 (建议不要运行有输入的，或者超长时间超多输出的代码)
 " more see :help pymode
 " ------------------------------------------------
-let g:pymode_python = 'python3'
+""let g:pymode_python = 'python3'
 ""let g:pymode_indent = 1
 ""let g:pymode_motion = 1
 ""let g:pymode_lint = 0
