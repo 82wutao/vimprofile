@@ -338,23 +338,46 @@ let g:AutoPairsMultilineClose = 1                                   "启用跳�
 " ------------------------------------------------
 " For airline
 " ------------------------------------------------
-let g:airline_left_sep = '->'
-let g:airline_left_alt_sep = '>'
-let g:airline_right_sep = '<-'
-let g:airline_right_alt_sep = '<'
 
-if !exists('g:airline_symbols') " 修改了一些个人不喜欢的字符
-    let g:airline_symbols = {}
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
 endif
-let g:airline_symbols.linenr = " Nr" " current line
-let g:airline_symbols.maxlinenr = 'Tot' "maxline
-let g:airline_symbols.whitespace = '|'
-let g:airline_symbols.branch = 'Branch:'
-let g:airline_symbols.readonly = "RO"
-let g:airline_symbols.dirty = " Dty"
-let g:airline_symbols.crypt = "Crp"
 
-let g:airline_theme='powerlineish'                     " 设置主题
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.colnr = ' ㏇:'
+let g:airline_symbols.colnr = ' ℅:'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = ' ␊:'
+let g:airline_symbols.linenr = ' ␤:'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+""let g:airline_left_sep = ''
+""let g:airline_left_alt_sep = ''
+""let g:airline_right_sep = ''
+""let g:airline_right_alt_sep = ''
+""let g:airline_symbols.branch = ''
+""let g:airline_symbols.colnr = ' :'
+""let g:airline_symbols.readonly = ''
+""let g:airline_symbols.linenr = ' :'
+""let g:airline_symbols.maxlinenr = '☰ '
+""let g:airline_symbols.dirty='⚡'
+  
+let g:airline_theme='papercolor'                     " 设置主题
 let g:airline_powerline_fonts = 1                    " 使用powerline打过补丁的字体
 let g:airline#extensions#tabline#enabled = 1         " 开启tabline
 let g:airline#extensions#tabline#buffer_nr_show = 1  " tabline中buffer显示编号
