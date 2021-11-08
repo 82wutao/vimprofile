@@ -150,7 +150,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'SirVer/ultisnips'                                            " 代码片段 配合vim-snippets and coc-nvim
 Plug 'honza/vim-snippets'                                          " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
 
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } "写python语言的各种操作, 见配置a
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } "写python语言的各种操作, 见配置a
 "Plug 'yssource/python.vim'                                        " python 推荐：****
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}                           " for html coding
 
@@ -343,7 +343,6 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-" unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
@@ -442,7 +441,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " 使用,r 运行当前python代码 (建议不要运行有输入的，或者超长时间超多输出的代码)
 " more see :help pymode
 " ------------------------------------------------
-let g:pymode_python = 'python3'
+""let g:pymode_python = 'python3'
 ""let g:pymode_indent = 1
 ""let g:pymode_motion = 1
 ""let g:pymode_lint = 0
