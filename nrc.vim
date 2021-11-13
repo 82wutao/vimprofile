@@ -431,7 +431,8 @@ let g:CoolTotalMatches = 1
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" let g:UltiSnipsSnippetDirectories=["UltiSnips", "mycoolsnippets"]
+let snips_dir=s:path('snips')
+let g:UltiSnipsSnippetDirectories=[snips_dir]
 
 " ------------------------------------------------
 " For python-mode
