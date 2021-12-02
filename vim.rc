@@ -226,7 +226,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom ={
             \ "Deleted"   : "Del",
             \ "Dirty"     : "Dty",
             \ "Clean"     : "Cln",
-            \ 'Ignored'   : 'Ign',
+            \ "Ignored"   : "Ign",
             \ "Unknown"   : "Ukn"
             \ }
 
@@ -343,22 +343,22 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline_section_a      =airline#section#create(['mode', 'crypt', 'paste', 'spell', 'iminsert'])
-let g:airline_section_b      =airline#section#create(['hunks', 'branch'])
-let g:airline_section_c      =airline#section#create(['bufferline or filename', 'readonly'])
-let g:airline_section_gutter =airline#section#create(['csv'])
-let g:airline_section_x      =airline#section#create(['tagbar', 'filetype', 'virtualenv'])
-let g:airline_section_y      =airline#section#create(['fileencoding', 'fileformat', 'bom', 'eol'])
-let g:airline_section_z      =airline#section#create(['percentage', 'line number', 'column number'])
-let g:airline_section_error  =airline#section#create(['ycm_error_count', 'syntastic-err', 'eclim', 'languageclient_error_count'])
-let g:airline_section_warning=airline#section#create(['ycm_warning_count', 'syntastic-warn', 'languageclient_warning_count', 'whitespace'])
-let g:airline_skip_empty_sections=1
+""let g:airline_section_a      =airline#section#create(['mode', 'crypt', 'paste', 'spell', 'iminsert'])
+""let g:airline_section_b      =airline#section#create(['hunks', 'branch'])
+""let g:airline_section_c      =airline#section#create(['bufferline or filename', 'readonly'])
+""let g:airline_section_gutter =airline#section#create(['csv'])
+""let g:airline_section_x      =airline#section#create(['tagbar', 'filetype', 'virtualenv'])
+""let g:airline_section_y      =airline#section#create(['fileencoding', 'fileformat', 'bom', 'eol'])
+""let g:airline_section_z      =airline#section#create(['percentage', 'linenr', 'column number'])
+""let g:airline_section_error  =airline#section#create(['ycm_error_count', 'syntastic-err', 'eclim', 'languageclient_error_count'])
+""let g:airline_section_warning=airline#section#create(['ycm_warning_count', 'syntastic-warn', 'languageclient_warning_count', 'whitespace'])
+""let g:airline_skip_empty_sections=1
 
 " let g:airline_section_c = airline#section#create(['tagbar'])
-let g:airline_section_b = '%{strftime("%d/%m %H:%M")}'
+""let g:airline_section_b = '%{strftime("%d/%m %H:%M")}'
 " let g:airline_section_x = '%{expand("%")}'  " 显示文件名
 " let g:airline_section_y = airline#section#create(['%{strftime("%D")}'])
-let g:airline_section_z = airline#section#create(['%{strftime("%m/%d %H:%M ")}', 'linenr', 'maxlinenr'])
+let g:airline_section_z = airline#section#create(['%{strftime("%m-%d %H:%M ")}', 'linenr', 'maxlinenr'])
 " let g:airline#extensions#tabline#enabled = 1
 
 let g:airline_left_sep = '»'
