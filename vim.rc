@@ -90,8 +90,8 @@ set matchtime=2                                                    " 显示括�
 set title
 set showtabline=2                                                  " 总是显示标签栏
 
-set laststatus=2                                                   "是否显示状态栏。0 表示不显示，1 表示只在多窗口时显示，2 表示显示。
 " 这里就不设置了，airline 插件会覆盖
+" set laststatus=2                                                   "是否显示状态栏。0 表示不显示，1 表示只在多窗口时显示，2 表示显示。
 " set statusline=                                                  " 清空状态了
 " set statusline+=\ %F                                             " 文件名
 " set statusline+=\ [%1*%M%*%n%R%H]                                " buffer 编号和状态
@@ -113,6 +113,7 @@ set signcolumn=yes                                                 " 总是显�
 
 set splitright                                                     " 水平切割窗口时，默认在右边显示新窗口
 
+filetype plugin off
 " plugins
 call plug#begin('~/.vim/plugged')                                  " 在这里面输入安装的插件
 Plug 'mhinz/vim-startify'                                          " cowsay and 数字键打开历史文件
@@ -132,7 +133,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
-""Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 Plug 'kien/rainbow_parentheses.vim'
@@ -148,10 +149,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'SirVer/ultisnips'                                            " 代码片段 配合vim-snippets and coc-nvim
-Plug 'honza/vim-snippets'                                          " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
+""Plug 'honza/vim-snippets'                                          " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
 
-"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } "写python语言的各种操作, 见配置a
-"Plug 'yssource/python.vim'                                        " python 推荐：****
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}                           " for html coding
 
 " 6 error tip
@@ -443,29 +442,13 @@ let g:CoolTotalMatches = 1
 " For ultisnips and coc-ultisnips and vim-snippets
 " 使用Ctrl+j, Ctrl+k 作为snippets时的跳转键 more see :help ultisnips and :help vim-snippets
 " ------------------------------------------------
+let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let snips_dir=s:path('snips')
 let g:UltiSnipsSnippetDirectories=[snips_dir]
 
-" ------------------------------------------------
-" For python-mode
-" 使用python模式编写python代码，并禁用lint, flod, rope功能
-" motion定义 [[, ]], [M, ]M 跳转到前后类，函数
-" motion定义新文本对象 aM, aC, iM, iC, 如yaM,diC分表表示复制一个method, 删除一个Class
-" 使用,r 运行当前python代码 (建议不要运行有输入的，或者超长时间超多输出的代码)
-" more see :help pymode
-" ------------------------------------------------
-""let g:pymode_python = 'python3'
-""let g:pymode_indent = 1
-""let g:pymode_motion = 1
-""let g:pymode_lint = 0
-""let g:pymode_folding = 0
-""let g:pymode_rope = 0
-""let g:pymode_breakpoint = 0
-""let g:pymode_run = 1
-""let g:pymode_run_bind = '<leader>r'
 
 " ------------------------------------------------
 " For ale
