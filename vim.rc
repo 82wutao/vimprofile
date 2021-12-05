@@ -357,8 +357,7 @@ endif
 ""let g:airline_section_b = '%{strftime("%d/%m %H:%M")}'
 " let g:airline_section_x = '%{expand("%")}'  " 显示文件名
 " let g:airline_section_y = airline#section#create(['%{strftime("%D")}'])
-let g:airline_section_z = airline#section#create(['%{strftime("%m-%d %H:%M ")}', 'linenr', 'maxlinenr'])
-" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_section_z = airline#section#create(['%{strftime("%m-%d %H:%M ")}', 'linenr', 'maxlinenr'])
 
 let g:airline_left_sep = '»'
 let g:airline_right_sep = '«'
@@ -753,7 +752,7 @@ endif
 
 
 " txt show format
-set textwidth=80           "设置行宽，即一行显示多少个字符
+set textwidth=120          "设置行宽，即一行显示多少个字符
 set wrap                   "自动折行，即太长的行分成几行显示。
 set linebreak              "只有遇到指定的符号（比如空格、连词号和其他标点符号），才发生折行。也就是说，不会在单词内部折行。
 set wrapmargin=2           "指定折行处与编辑窗口的右边缘之间空出的字符数。
