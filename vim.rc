@@ -19,8 +19,6 @@ exec 'set rtp+='.s:home
 set rtp+=~/.vim
 
 
-" 取得本文件所在的目录
-let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 function! s:path(path)
 	let path = expand(s:home . '/' . a:path )
@@ -38,7 +36,7 @@ set nocompatible
 ""set encoding=utf-8
 set history=1000                                                   "Vim 需要记住多少次历史操作。
 set noerrorbells                                                   "出错时，不要发出响声。
-set visualbell                                                     "出错时，发出视觉提示，通常是屏幕闪烁。
+set novisualbell                                                     "出错时，发出视觉提示，通常是屏幕闪烁。
 
 set lazyredraw                                                     " 延迟绘制（提升性能）
 set winaltkeys=no                                                  " Windows 禁用 ALT 操作菜单（使得 ALT 可以用到 Vim里）
@@ -138,10 +136,10 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'jiangmiao/auto-pairs'                                        " 自动匹配成对字符如括号等
+Plug 'farmergreg/vim-lastplace'                                    " 重新打开文件时定位到上次关闭时的位置
 "Plug 'tpope/vim-commentary'                                       " gcc 注释单行，gc 注释选中的行
 "Plug 'godlygeek/tabular', { 'on': 'Tabularize' }                  " 表格对齐，使用命令 Tabularize
 "Plug 'Yggdroot/indentLine'
-Plug 'farmergreg/vim-lastplace'                                    " 重新打开文件时定位到上次关闭时的位置
 
 Plug 'chrisbra/vim-diff-enhanced'                                  " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 
@@ -151,6 +149,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'SirVer/ultisnips'                                            " 代码片段 配合vim-snippets and coc-nvim
 ""Plug 'honza/vim-snippets'                                          " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
 
+Plug 'davidhalter/jedi-vim'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}                           " for html coding
 
 " 6 error tip
@@ -436,6 +435,30 @@ nmap <leader>q :bp<cr>:bd #<cr> " 设置切换tab的快捷键 <\> + <q> 退出�
 " For vim-cool
 " ------------------------------------------------
 let g:CoolTotalMatches = 1
+
+" ------------------------------------------------
+" For vim-cool
+" ------------------------------------------------
+let g:jedi#auto_initialization = 1
+let g:jedi#auto_vim_configuration = 1
+let g:jedi#use_tabs_not_buffers = 1 "进入定义，使用tab 而不是buffer"
+let g:jedi#use_splits_not_buffers = 'left'  "进入定义，使用split 窗口而不是buffer"
+let g:jedi#popup_on_dot = 1
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = "1"
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_stubs_command = "<leader>s"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+
+
+
+
+
 
 " ------------------------------------------------
 " For ultisnips and coc-ultisnips and vim-snippets
