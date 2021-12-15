@@ -482,7 +482,7 @@ let g:ale_linters_explicit = 1                        "除g:ale_linters指定，
 let g:ale_lint_on_save =0                             "default this is 1,if u only wish lint on save  turn off following
 let g:ale_lint_on_enter = 0                           " if you don't want linters to run on opening a file
 let g:ale_lint_on_text_changed = 'normal'             " Write this in your vimrc file            another option:   never
-let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_delay = 500
 
 let g:ale_completion_delay = 500
