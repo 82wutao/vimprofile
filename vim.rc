@@ -530,9 +530,9 @@ nmap <Leader>ad :ALEDetail<CR>                        "<Leader>d查看错误或�
 
 " 编辑不同文件类型需要的语法检查器
 let g:ale_linters = {
-            \   'c': [ 'gcc', 'cppcheck'],
-            \   'cpp': ['gcc', 'cppcheck'],
-            \   'python': ['pylint', 'flake8'],
+            \   'c': [  'cppcheck'],
+            \   'cpp': [ 'cppcheck'],
+            \   'python': ['pylint' ],
             \   'reStructuredText':['rstcheck'],
             \   'bash': ['shellcheck'],
             \   'go': ['golint','go build', 'gofmt'],
@@ -566,14 +566,14 @@ endfunc
 
 let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
 let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
+let g:ale_c_cppcheck_options = '-Wall -O2 -std=c11'
+let g:ale_cpp_cppcheck_options = '-Wall -O2 -std=c++11'
 let g:ale_linters.text = ['textlint', 'write-good', 'languagetool']
 " 如果没有 gcc 只有 clang 时（FreeBSD）
-if executable('gcc') == 0 && executable('clang')
-    let g:ale_linters.c += ['clang']
-	let g:ale_linters.cpp += ['clang']
-endif
+""if executable('gcc') == 0 && executable('clang')
+""    let g:ale_linters.c += ['clang']
+""	let g:ale_linters.cpp += ['clang']
+""endif
 
 
 
