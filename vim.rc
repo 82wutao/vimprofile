@@ -528,26 +528,6 @@ nmap <Leader>ad :ALEDetail<CR>                        "<Leader>d查看错误或�
 "let s:warning_symbol = get(g:, 'airline#extensions#ale#warning_symbol', '⚡ ')
 
 
-" *****How can I configure my C or C++ project?
-" 项目结构不同，编译容易，编译参数不容易
-"The structure of C and C++ projects varies wildly from project to project, with many different build tools being used for building them, and many different formats for project configuration files.
-" ALE can run compilers easily, but ALE cannot easily detect which compiler flags to use.
-
-"Some tools and build configurations can generate compile_commands.json files.
-"The cppcheck, clangcheck, clangtidy and cquery linters can read these files for automatically determining the appropriate compiler flags to use.
-
-" For linting with compilers like gcc and clang, and with other tools, you will need to tell ALE which compiler flags to use yourself.
-" You can use different options for different projects with the g:ale_pattern_options setting. Consult the documentation for that setting for more information.
-" b:ale_linters can be used to select which tools you want to run, say if you want to use only gcc for one project, and only clang for another.
-
-"ALE will attempt to parse compile_commands.json files to discover compiler flags to use when linting code. See :help g:ale_c_parse_compile_commands for more information.
-"See Clang's documentation for compile_commands.json files. You should strongly consider generating them in your builds, which is easy to do with CMake.
-
-"You can also configure ALE to automatically run make -n to run dry runs on Makefiles to discover compiler flags.
-" This can execute arbitrary code, so the option is disabled by default. See :help g:ale_c_parse_makefile.
-
-"You may also configure buffer-local settings for linters with project-specific vimrc files. local_vimrc can be used for executing local vimrc files which can be shared in your project.
-
 " 编辑不同文件类型需要的语法检查器
 let g:ale_linters = {
             \   'c': [ 'gcc', 'cppcheck'],
@@ -580,8 +560,8 @@ function s:lintcfg(name)
 	return shellescape(filereadable(path2)? path2 : path1)
 endfunc
 " 设置 flake8/pylint 的参数
-let g:ale_python_pylint_options = '--rcfile='.s:lintcfg('pylint.conf')
-let g:ale_python_pylint_options .= ' --disable=W'
+""let g:ale_python_pylint_options = '--rcfile='.s:lintcfg('pylint.conf')
+""let g:ale_python_pylint_options .= ' --disable=W'
 ""let g:ale_python_flake8_options = '--conf='.s:lintcfg('flake8.conf')
 
 let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
@@ -595,18 +575,6 @@ if executable('gcc') == 0 && executable('clang')
 	let g:ale_linters.cpp += ['clang']
 endif
 
-
-" ALE supports jumping to the definition of words under your cursor with the :ALEGoToDefinition command using any enabled Language Server Protocol linters and tsserver.
-" ALE supports finding references for words under your cursor with the :ALEFindReferences command using any enabled Language Server Protocol linters and tsserver.
-" ALE supports "hover" information for printing brief information about symbols at the cursor taken from Language Server Protocol linters and tsserver with the ALEHover command.
-"          Truncated information will be displayed when the cursor rests on a symbol by default, as long as there are no problems on the same line.
-
-" ALE supports searching for workspace symbols via Language Server Protocol linters with the ALESymbolSearch command.
-"          Search queries can be performed to find functions, types, and more which are similar to a given query string.
-
-" **refator
-" ALE supports renaming symbols in symbols in code such as variables or class names with the ALERename command.
-" ALECodeAction will execute actions on the cursor or applied to a visual range selection, such as automatically fixing errors.
 
 
 " 在 linux/mac 下降低语法检查程序的进程优先级（不要卡到前台进程）
