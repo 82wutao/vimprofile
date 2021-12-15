@@ -530,8 +530,8 @@ nmap <Leader>ad :ALEDetail<CR>                        "<Leader>d查看错误或�
 
 " 编辑不同文件类型需要的语法检查器
 let g:ale_linters = {
-            \   'c': [  'cppcheck'],
-            \   'cpp': [ 'cppcheck'],
+            \   'c': [  'gcc'],
+            \   'cpp': [ 'gcc'],
             \   'python': ['pylint' ],
             \   'reStructuredText':['rstcheck'],
             \   'bash': ['shellcheck'],
@@ -539,26 +539,14 @@ let g:ale_linters = {
             \   'java': ['javac'],
             \   'javascript': ['eslint'],
             \}
-""            \   'rust': [ 'cargo', 'rls', 'rustc' ],
 ""let g:ale_linters_ignore = {'python': ['pylint']}
-""let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_fixers = {
             \   'python': [ 'autopep8' ],
             \   'javascript': ['eslint'],
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
             \}
-"\   'rust': ['rustfmt'],
 
 " 获取 pylint, flake8 的配置文件，在 vim-init/tools/conf 下面
-function s:lintcfg(name)
-	let conf = s:path('tools/conf/')
-	let path1 = conf . a:name
-	let path2 = expand('~/.vim/linter/'. a:name)
-	if filereadable(path2)
-		return path2
-	endif
-	return shellescape(filereadable(path2)? path2 : path1)
-endfunc
 " 设置 flake8/pylint 的参数
 ""let g:ale_python_pylint_options = '--rcfile='.s:lintcfg('pylint.conf')
 ""let g:ale_python_pylint_options .= ' --disable=W'
