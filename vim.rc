@@ -116,15 +116,15 @@ filetype plugin off
 call plug#begin('~/.vim/plugged')                                  " 在这里面输入安装的插件
 Plug 'mhinz/vim-startify'                                          " cowsay and 数字键打开历史文件
 
-Plug 'vim-scripts/khaki.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mavnn/mintty-colors-solarized'
-Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'rakr/vim-one'
-Plug 'crusoexia/vim-dracula'
 Plug 'morhetz/gruvbox'
-Plug 'w0ng/vim-hybrid'
+""Plug 'vim-scripts/khaki.vim'
+""Plug 'tomasr/molokai'
+""Plug 'rakr/vim-one'
+""Plug 'crusoexia/vim-dracula'
+""Plug 'w0ng/vim-hybrid'
 
 Plug 'preservim/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -141,13 +141,13 @@ Plug 'farmergreg/vim-lastplace'                                    " 重新打�
 "Plug 'godlygeek/tabular', { 'on': 'Tabularize' }                  " 表格对齐，使用命令 Tabularize
 "Plug 'Yggdroot/indentLine'
 
-Plug 'chrisbra/vim-diff-enhanced'                                  " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
+"Plug 'chrisbra/vim-diff-enhanced'                                  " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'SirVer/ultisnips'                                            " 代码片段 配合vim-snippets and coc-nvim
-""Plug 'honza/vim-snippets'                                          " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
+"Plug 'honza/vim-snippets'                                          " ctrl+j, ctrl+k, 输入代码片段的关键字后, 使用这两个快捷键前进后退
 
 Plug 'davidhalter/jedi-vim'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}                           " for html coding
@@ -439,6 +439,8 @@ let g:CoolTotalMatches = 1
 " ------------------------------------------------
 " For vim-cool
 " ------------------------------------------------
+
+set pythonthreedll="/mingw64/lib/libpython3.9.dll.a"
 let g:jedi#auto_initialization = 1
 let g:jedi#auto_vim_configuration = 1
 let g:jedi#use_tabs_not_buffers = 1 "进入定义，使用tab 而不是buffer"
