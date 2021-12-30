@@ -120,11 +120,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'mavnn/mintty-colors-solarized'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
-""Plug 'vim-scripts/khaki.vim'
-""Plug 'tomasr/molokai'
-""Plug 'rakr/vim-one'
-""Plug 'crusoexia/vim-dracula'
-""Plug 'w0ng/vim-hybrid'
 
 Plug 'preservim/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin'
